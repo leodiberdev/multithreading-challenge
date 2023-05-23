@@ -88,13 +88,12 @@ func requestApiCEP(cep string) (ApiCep, error) {
 		return ApiCep{}, err
 	}
 
-	var cepData ApiCep
-	err = json.Unmarshal(responseData, &cepData)
-	if err != nil {
-		return ApiCep{}, err
-	}
-
 	if res.StatusCode == http.StatusOK {
+		var cepData ApiCep
+		err = json.Unmarshal(responseData, &cepData)
+		if err != nil {
+			return ApiCep{}, err
+		}
 		return cepData, nil
 	}
 
